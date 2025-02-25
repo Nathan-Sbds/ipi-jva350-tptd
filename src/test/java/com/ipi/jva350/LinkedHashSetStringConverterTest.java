@@ -1,5 +1,4 @@
 package com.ipi.jva350;
-
 import com.ipi.jva350.model.LinkedHashSetStringConverter;
 import org.junit.jupiter.api.Test;
 
@@ -8,9 +7,7 @@ import java.util.LinkedHashSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-
 class LinkedHashSetStringConverterTest {
-
     private final LinkedHashSetStringConverter converter = new LinkedHashSetStringConverter();
 
     @Test

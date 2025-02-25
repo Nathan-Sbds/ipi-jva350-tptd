@@ -1,5 +1,4 @@
 package com.ipi.jva350;
-
 import com.ipi.jva350.model.SalarieAideADomicile;
 import org.junit.jupiter.api.Test;
 
@@ -7,9 +6,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 class SalarieAideADomicileTest {
-
     @Test
     void testConstructor() {
         String nom = "John Doe";
@@ -20,11 +17,9 @@ class SalarieAideADomicileTest {
         double joursTravaillesAnneeNMoins1 = 20;
         double congesPayesAcquisAnneeNMoins1 = 10;
         double congesPayesPrisAnneeNMoins1 = 5;
-
         SalarieAideADomicile salarie = new SalarieAideADomicile(nom, moisDebutContrat, moisEnCours,
                 joursTravaillesAnneeN, congesPayesAcquisAnneeN, joursTravaillesAnneeNMoins1,
                 congesPayesAcquisAnneeNMoins1, congesPayesPrisAnneeNMoins1);
-
         assertEquals(nom, salarie.getNom());
         assertEquals(moisDebutContrat, salarie.getMoisDebutContrat());
         assertEquals(moisEnCours, salarie.getMoisEnCours());
@@ -33,9 +28,7 @@ class SalarieAideADomicileTest {
         assertEquals(joursTravaillesAnneeNMoins1, salarie.getJoursTravaillesAnneeNMoins1());
         assertEquals(congesPayesAcquisAnneeNMoins1, salarie.getCongesPayesAcquisAnneeNMoins1());
         assertEquals(congesPayesPrisAnneeNMoins1, salarie.getCongesPayesPrisAnneeNMoins1());
-
         assertEquals(0, salarie.getCongesPayesPris().size());
-
         //tests all the setter
         salarie.setNom("Jane Doe");
         salarie.setMoisDebutContrat(LocalDate.of(2022, 2, 1));
@@ -45,7 +38,6 @@ class SalarieAideADomicileTest {
         salarie.setJoursTravaillesAnneeNMoins1(25);
         salarie.setCongesPayesAcquisAnneeNMoins1(15);
         salarie.setCongesPayesPrisAnneeNMoins1(10);
-
         assertEquals("Jane Doe", salarie.getNom());
         assertEquals(LocalDate.of(2022, 2, 1), salarie.getMoisDebutContrat());
         assertEquals(LocalDate.of(2023, 8, 1), salarie.getMoisEnCours());
@@ -61,7 +53,6 @@ class SalarieAideADomicileTest {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
         salarie.setJoursTravaillesAnneeNMoins1(15);
         assertTrue(salarie.aLegalementDroitADesCongesPayes());
-
         salarie.setJoursTravaillesAnneeNMoins1(5);
         assertFalse(salarie.aLegalementDroitADesCongesPayes());
     }
@@ -79,7 +70,6 @@ class SalarieAideADomicileTest {
     void testEstJourOuvrable() {
         LocalDate jour = LocalDate.of(2023, 7, 1);
         assertTrue(SalarieAideADomicile.estJourOuvrable(jour));
-
         jour = LocalDate.of(2023, 7, 2);
         assertFalse(SalarieAideADomicile.estJourOuvrable(jour));
     }

@@ -1,14 +1,10 @@
 package com.ipi.jva350.model;
-
 import java.time.LocalDate;
 import java.util.*;
-
 public final class Entreprise {
-
     private static final Map<Integer, LocalDate> datePaque = new HashMap<>();
 
     private Entreprise() {
-
     }
 
     static {
@@ -38,34 +34,30 @@ public final class Entreprise {
         datePaque.put(2035, LocalDate.of(2035, 3, 25));
     }
 
-
-    public static List<LocalDate> joursFeries(LocalDate now){
-
+    public static List<LocalDate> joursFeries(LocalDate now) {
         return Arrays.asList(
                 // 1er janvier	Jour de l’an
-                LocalDate.of(now.getYear(), 1,1),
+                LocalDate.of(now.getYear(), 1, 1),
                 // Lendemain du dimanche de Pâques.	Lundi de Pâques
                 datePaque.get(now.getYear()).plusDays(1L),
                 // 1er mai	Fête du Travail
-                LocalDate.of(now.getYear(), 5,1),
+                LocalDate.of(now.getYear(), 5, 1),
                 // 8 mai Fête de la Victoire
-                LocalDate.of(now.getYear(), 5,8),
+                LocalDate.of(now.getYear(), 5, 8),
                 // Jeudi 40 jours après Pâques Ascension Fête chrétienne célébrant la montée de Jésus aux cieux.
                 datePaque.get(now.getYear()).plusDays(40L),
                 // Le lundi suivant le dimanche de Pentecôte (le septième après Pâques).
                 datePaque.get(now.getYear()).plusDays(50L),
                 // 14 juillet Fête nationale
-                LocalDate.of(now.getYear(), 7,14),
+                LocalDate.of(now.getYear(), 7, 14),
                 // 15 août Assomption
-                LocalDate.of(now.getYear(), 8,15),
+                LocalDate.of(now.getYear(), 8, 15),
                 // 1er novembre	Toussaint Fête de tous les saints de l’Église catholique.
-                LocalDate.of(now.getYear(), 11,1),
+                LocalDate.of(now.getYear(), 11, 1),
                 // 11 novembre Armistice de 1918
-                LocalDate.of(now.getYear(), 11,11),
+                LocalDate.of(now.getYear(), 11, 11),
                 // 25 décembre Noël
-                LocalDate.of(now.getYear(), 12,25)
-
-        );
+                LocalDate.of(now.getYear(), 12, 25));
     }
 
     public static boolean bissextile(int y) {
@@ -78,7 +70,6 @@ public final class Entreprise {
         return proportions[mois - 1];
     }
 
-
     public static LocalDate getPremierJourAnneeDeConges(LocalDate d) {
         if (d == null) {
             return null;
@@ -87,8 +78,7 @@ public final class Entreprise {
     }
 
     public static boolean estJourFerie(LocalDate jour) {
-        int monEntier = (int) Entreprise.joursFeries(jour).stream().filter(d ->
-                d.equals(jour)).count();
+        int monEntier = (int) Entreprise.joursFeries(jour).stream().filter(d -> d.equals(jour)).count();
         int test = bissextile(jour.getYear()) ? 1 : 0;
         if (test != 0 && monEntier <= 1) {
             test--;
@@ -98,14 +88,14 @@ public final class Entreprise {
 
     /**
      * Calcule si une date donnée est dans une plage (intervalle) de date (inclusif)
-     * @param d date à tester
+     *
+     * @param d     date à tester
      * @param debut date de début de la plage
-     * @param fin date de fin de la plage
+     * @param fin   date de fin de la plage
      * @return vrai si la date est dans la plage, faux sinon
      */
     public static boolean estDansPlage(LocalDate d, LocalDate debut, LocalDate fin) {
         if (d == null || debut == null || fin == null) return false;
         return !d.isBefore(debut) && !d.isAfter(fin);
     }
-
 }

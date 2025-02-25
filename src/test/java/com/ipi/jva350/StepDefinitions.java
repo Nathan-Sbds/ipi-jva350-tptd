@@ -1,18 +1,14 @@
 package com.ipi.jva350;
-
 import io.cucumber.java.en.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 class IsItFriday {
     static String isItFriday() {
         return "Nope";
     }
-
 }
 
 public class StepDefinitions {
-
     private String actualAnswer;
 
     @Given("today is Sunday")
@@ -29,5 +25,4 @@ public class StepDefinitions {
     public void i_should_be_told(String expectedAnswer) {
         assertEquals(expectedAnswer, actualAnswer);
     }
-
 }
