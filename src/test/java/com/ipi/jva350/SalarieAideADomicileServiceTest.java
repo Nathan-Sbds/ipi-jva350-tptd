@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import static org.mockito.Mockito.*;
 
-public class SalarieAideADomicileServiceTest {
+class SalarieAideADomicileServiceTest {
 
     @Test
     void testAjouteConge() throws SalarieException {

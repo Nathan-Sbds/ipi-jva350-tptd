@@ -5,24 +5,24 @@ import io.cucumber.java.en.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class IsItFriday {
-    static String isItFriday(String today) {
+    static String isItFriday() {
         return "Nope";
     }
+
 }
 
 public class StepDefinitions {
 
-    private String today;
     private String actualAnswer;
 
     @Given("today is Sunday")
     public void today_is_Sunday() {
-        today = "Sunday";
+        String today = "Sunday";
     }
 
     @When("I ask whether it's Friday yet")
     public void i_ask_whether_it_s_Friday_yet() {
-        actualAnswer = IsItFriday.isItFriday(today);
+        actualAnswer = IsItFriday.isItFriday();
     }
 
     @Then("I should be told {string}")

@@ -4,7 +4,6 @@ import com.ipi.jva350.exception.SalarieException;
 import com.ipi.jva350.model.Entreprise;
 import com.ipi.jva350.model.SalarieAideADomicile;
 import com.ipi.jva350.repository.SalarieAideADomicileRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityExistsException;
@@ -12,6 +11,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -107,10 +107,10 @@ public class SalarieAideADomicileService {
             throw new SalarieException("N'a pas légalement droit à des congés payés !");
         }
 
-        LinkedHashSet<LocalDate> joursDecomptes = salarieAideADomicile
+        Set<LocalDate> joursDecomptes = salarieAideADomicile
                 .calculeJoursDeCongeDecomptesPourPlage(jourDebut, jourFin);
 
-        if (joursDecomptes.size() == 0) {
+        if (joursDecomptes.isEmpty()) {
             throw new SalarieException("Pas besoin de congés !");
         }
 
@@ -123,18 +123,7 @@ public class SalarieAideADomicileService {
                 .filter(d -> !d.isAfter(LocalDate.of(Entreprise.getPremierJourAnneeDeConges(
                         salarieAideADomicile.getMoisEnCours()).getYear() + 1, 5, 31)))
                 .collect(Collectors.toList()));
-        int nbCongesPayesPrisDecomptesAnneeN = congesPayesPrisDecomptesAnneeN.size();
-        if (joursDecomptes.size() > nbCongesPayesPrisDecomptesAnneeN + 1) {
-            // NB. 1 jour dans la nouvelle année est toujours toléré, pour résoudre le cas d'un congé devant se finir un
-            // samedi le premier jour de la nouvelle année de congés...
-            throw new SalarieException("Pas possible de prendre de congé dans l'année de congés suivante (hors le premier jour)");
-        }
-
-        if (nbCongesPayesPrisDecomptesAnneeN > salarieAideADomicile.getCongesPayesRestantAnneeNMoins1()) {
-            throw new SalarieException("Conges Payes Pris Decomptes (" + nbCongesPayesPrisDecomptesAnneeN
-                    + ") dépassent les congés acquis en année N-1 : "
-                    + salarieAideADomicile.getCongesPayesRestantAnneeNMoins1());
-        }
+        int nbCongesPayesPrisDecomptesAnneeN = getNbCongesPayesPrisDecomptesAnneeN(salarieAideADomicile, congesPayesPrisDecomptesAnneeN, joursDecomptes);
 
         double limiteEntreprise = this.calculeLimiteEntrepriseCongesPermis(
                 salarieAideADomicile.getMoisEnCours(),
@@ -152,6 +141,22 @@ public class SalarieAideADomicileService {
         salarieAideADomicileRepository.save(salarieAideADomicile);
     }
 
+    private static int getNbCongesPayesPrisDecomptesAnneeN(SalarieAideADomicile salarieAideADomicile, LinkedHashSet<LocalDate> congesPayesPrisDecomptesAnneeN, Set<LocalDate> joursDecomptes) throws SalarieException {
+        int nbCongesPayesPrisDecomptesAnneeN = congesPayesPrisDecomptesAnneeN.size();
+        if (joursDecomptes.size() > nbCongesPayesPrisDecomptesAnneeN + 1) {
+            // NB. 1 jour dans la nouvelle année est toujours toléré, pour résoudre le cas d'un congé devant se finir un
+            // samedi le premier jour de la nouvelle année de congés...
+            throw new SalarieException("Pas possible de prendre de congé dans l'année de congés suivante (hors le premier jour)");
+        }
+
+        if (nbCongesPayesPrisDecomptesAnneeN > salarieAideADomicile.getCongesPayesRestantAnneeNMoins1()) {
+            throw new SalarieException("Conges Payes Pris Decomptes (" + nbCongesPayesPrisDecomptesAnneeN
+                    + ") dépassent les congés acquis en année N-1 : "
+                    + salarieAideADomicile.getCongesPayesRestantAnneeNMoins1());
+        }
+        return nbCongesPayesPrisDecomptesAnneeN;
+    }
+
     /**
      * Clôture le mois en cours du salarie donné (et fait les calculs requis pour sa feuille de paie de ce mois) :
      * (pas forcément en cours, par exemple en cas de retard, vacances de l'entreprise)
@@ -162,12 +167,12 @@ public class SalarieAideADomicileService {
      * @param salarieAideADomicile salarié
      * @param joursTravailles jours travaillés dans le mois en cours du salarié
      */
-    public void clotureMois(SalarieAideADomicile salarieAideADomicile, double joursTravailles) throws SalarieException {
+    public void clotureMois(SalarieAideADomicile salarieAideADomicile, double joursTravailles) {
         // incrémente les jours travaillés de l'année N du salarié de celles passées en paramètres
         salarieAideADomicile.setJoursTravaillesAnneeN(salarieAideADomicile.getJoursTravaillesAnneeN() + joursTravailles);
 
         salarieAideADomicile.setCongesPayesAcquisAnneeN(salarieAideADomicile.getCongesPayesAcquisAnneeN()
-                + salarieAideADomicile.CONGES_PAYES_ACQUIS_PAR_MOIS);
+                + SalarieAideADomicile.congesPayesAcquisParMois);
 
         salarieAideADomicile.setMoisEnCours(salarieAideADomicile.getMoisEnCours().plusMonths(1));
 
