@@ -16,12 +16,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class SalarieAideADomicileService {
-
-    @Autowired
-    private SalarieAideADomicileRepository salarieAideADomicileRepository;
-
-    public SalarieAideADomicileService() {
+    public SalarieAideADomicileService(SalarieAideADomicileRepository salarieAideADomicileRepository) {
+        this.salarieAideADomicileRepository = salarieAideADomicileRepository;
     }
+
+    private final SalarieAideADomicileRepository salarieAideADomicileRepository;
 
     /**
      * Créée un nouveau salarié en base de données.

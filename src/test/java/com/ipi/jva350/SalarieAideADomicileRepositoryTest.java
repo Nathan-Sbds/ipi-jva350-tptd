@@ -8,13 +8,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
-public class SalarieAideADomicileRepositoryTest {
+class SalarieAideADomicileRepositoryTest {
 
     @Autowired
     private SalarieAideADomicileRepository repository;
 
     @Test
-    public void testFindByNom() {
+    void testFindByNom() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
         salarie.setNom("John Doe");
         repository.save(salarie);
@@ -24,7 +24,7 @@ public class SalarieAideADomicileRepositoryTest {
     }
 
     @Test
-    public void testPartCongesPrisTotauxAnneeNMoins1() {
+    void testPartCongesPrisTotauxAnneeNMoins1() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
         salarie.setCongesPayesAcquisAnneeNMoins1(20);
         salarie.setCongesPayesPrisAnneeNMoins1(10);

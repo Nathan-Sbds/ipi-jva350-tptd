@@ -8,10 +8,10 @@ import java.util.LinkedHashSet;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SalarieAideADomicileTest {
+class SalarieAideADomicileTest {
 
     @Test
-    public void testALegalementDroitADesCongesPayes() {
+    void testALegalementDroitADesCongesPayes() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
         salarie.setJoursTravaillesAnneeNMoins1(15);
         assertTrue(salarie.aLegalementDroitADesCongesPayes());
@@ -21,7 +21,7 @@ public class SalarieAideADomicileTest {
     }
 
     @Test
-    public void testCalculeJoursDeCongeDecomptesPourPlage() {
+    void testCalculeJoursDeCongeDecomptesPourPlage() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
         LocalDate dateDebut = LocalDate.of(2023, 7, 1);
         LocalDate dateFin = LocalDate.of(2023, 7, 10);

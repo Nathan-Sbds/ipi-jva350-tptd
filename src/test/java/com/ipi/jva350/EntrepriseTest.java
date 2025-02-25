@@ -8,10 +8,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class EntrepriseTest {
+class EntrepriseTest {
 
     @Test
-    public void testEstDansPlage() {
+    void testEstDansPlage() {
         LocalDate date = LocalDate.of(2023, 7, 15);
         LocalDate debut = LocalDate.of(2023, 7, 1);
         LocalDate fin = LocalDate.of(2023, 7, 31);
@@ -21,7 +21,7 @@ public class EntrepriseTest {
         assertFalse(Entreprise.estDansPlage(date, debut, fin));
     }
     @Test
-    public void testEstJourFerie() {
+    void testEstJourFerie() {
         LocalDate jour = LocalDate.of(2023, 1, 1);
         assertTrue(Entreprise.estJourFerie(jour));
 
@@ -30,7 +30,7 @@ public class EntrepriseTest {
     }
 
     @Test
-    public void testBissextile() {
+    void testBissextile() {
         assertTrue(Entreprise.bissextile(2016));
         assertTrue(Entreprise.bissextile(2020));
         assertTrue(Entreprise.bissextile(2024));
@@ -58,7 +58,7 @@ public class EntrepriseTest {
             "2023-11-01, 0.9333333333333333",
             "2023-12-01, 1.0"
     })
-    public void testProportionPondereeDuMois(String date, double expected) {
+    void testProportionPondereeDuMois(String date, double expected) {
         assertEquals(expected, Entreprise.proportionPondereeDuMois(LocalDate.parse(date)));
     }
 

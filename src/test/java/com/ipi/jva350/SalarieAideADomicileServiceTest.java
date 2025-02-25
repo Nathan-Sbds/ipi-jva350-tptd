@@ -10,7 +10,7 @@ import static org.mockito.Mockito.*;
 public class SalarieAideADomicileServiceTest {
 
     @Test
-    public void testAjouteConge() throws SalarieException {
+    void testAjouteConge() throws SalarieException {
         SalarieAideADomicileService service = mock(SalarieAideADomicileService.class);
         SalarieAideADomicile salarie = new SalarieAideADomicile();
         LocalDate jourDebut = LocalDate.of(2023, 7, 1);
