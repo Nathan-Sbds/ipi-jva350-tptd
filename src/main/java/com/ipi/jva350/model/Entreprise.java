@@ -148,7 +148,7 @@ public final class Entreprise {
      */
     public static boolean estDansPlage(LocalDate d, LocalDate debut, LocalDate fin) {
         if (d == null || debut == null || fin == null) return false;
-        return d != null && debut != null && fin != null && !d.isBefore(debut) && !d.isAfter(fin);
+        return !d.isBefore(debut) && !d.isAfter(fin);
     }
 
 }
