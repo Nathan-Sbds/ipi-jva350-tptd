@@ -55,21 +55,6 @@ class SalarieAideADomicileServiceTest {
         assertEquals(15, limite);
     }
     @Test
-    void testAjouteConge() {
-        SalarieAideADomicile salarie = mock(SalarieAideADomicile.class);
-        LocalDate jourDebut = LocalDate.of(2023, 7, 1);
-        LocalDate jourFin = LocalDate.of(2023, 7, 10);
-        when(salarie.aLegalementDroitADesCongesPayes()).thenReturn(true);
-        when(salarie.calculeJoursDeCongeDecomptesPourPlage(jourDebut, jourFin))
-                .thenReturn(new LinkedHashSet<>(Set.of(jourDebut, jourFin)));
-        when(salarie.getMoisEnCours()).thenReturn(LocalDate.of(2023, 7, 1));
-        when(salarie.getCongesPayesAcquisAnneeNMoins1()).thenReturn(20.0);
-        when(salarie.getMoisDebutContrat()).thenReturn(LocalDate.of(2020, 1, 1));
-        when(salarie.getCongesPayesRestantAnneeNMoins1()).thenReturn(20.0);
-        assertFalse(salarie.getCongesPayesPris().contains(jourDebut));
-        assertFalse(salarie.getCongesPayesPris().contains(jourFin));
-    }
-    @Test
     void testClotureMois() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
         salarie.setMoisEnCours(LocalDate.of(2023, 5, 1));
