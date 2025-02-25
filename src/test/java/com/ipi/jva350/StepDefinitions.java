@@ -17,6 +17,7 @@ public class StepDefinitions {
 
     @Given("today is Sunday")
     public void today_is_Sunday() {
+        // This method is intentionally left empty because the scenario does not require any action for this step.
     }
 
     @When("I ask whether it's Friday yet")
