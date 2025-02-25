@@ -88,6 +88,7 @@ class SalarieAideADomicileServiceTest {
 
         assertFalse(salarie.getCongesPayesPris().contains(jourDebut));
         assertFalse(salarie.getCongesPayesPris().contains(jourFin));
+
     }
 
     @Test
