@@ -17,7 +17,6 @@ public class EntrepriseTest {
         date = LocalDate.of(2023, 8, 1);
         assertFalse(Entreprise.estDansPlage(date, debut, fin));
     }
-
     @Test
     public void testEstJourFerie() {
         LocalDate jour = LocalDate.of(2023, 1, 1);
