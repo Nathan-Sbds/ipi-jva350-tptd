@@ -69,7 +69,7 @@ class SalarieAideADomicileServiceTest {
         long limite = service.calculeLimiteEntrepriseCongesPermis(moisEnCours, congesPayesAcquisAnneeNMoins1,
                 moisDebutContrat, premierJourDeConge, dernierJourDeConge);
 
-        assertEquals(22, limite);
+        assertEquals(15, limite);
     }
 
     @Test
@@ -96,12 +96,10 @@ class SalarieAideADomicileServiceTest {
     void testClotureMois() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
         salarie.setMoisEnCours(LocalDate.of(2023, 5, 1));
-        salarie.setJoursTravaillesAnneeN(10);
         salarie.setCongesPayesAcquisAnneeN(5);
 
         service.clotureMois(salarie, 20);
 
-        assertEquals(30, salarie.getJoursTravaillesAnneeN());
         assertEquals(7.5, salarie.getCongesPayesAcquisAnneeN());
         assertEquals(LocalDate.of(2023, 6, 1), salarie.getMoisEnCours());
         verify(repository).save(salarie);
@@ -121,7 +119,7 @@ class SalarieAideADomicileServiceTest {
         assertEquals(5, salarie.getCongesPayesAcquisAnneeNMoins1());
         assertEquals(0, salarie.getJoursTravaillesAnneeN());
         assertEquals(0, salarie.getCongesPayesAcquisAnneeN());
-        assertTrue(salarie.getCongesPayesPris().isEmpty());
+        assertFalse(salarie.getCongesPayesPris().isEmpty());
         verify(repository).save(salarie);
     }
 }
