@@ -3,10 +3,8 @@ import java.time.LocalDate;
 import java.util.*;
 public final class Entreprise {
     private static final Map<Integer, LocalDate> datePaque = new HashMap<>();
-
     private Entreprise() {
     }
-
     static {
         datePaque.put(2012, LocalDate.of(2012, 4, 8));
         datePaque.put(2013, LocalDate.of(2013, 3, 31));
@@ -33,7 +31,6 @@ public final class Entreprise {
         datePaque.put(2034, LocalDate.of(2034, 4, 9));
         datePaque.put(2035, LocalDate.of(2035, 3, 25));
     }
-
     public static List<LocalDate> joursFeries(LocalDate now) {
         return Arrays.asList(
                 // 1er janvier	Jour de l’an
@@ -59,24 +56,20 @@ public final class Entreprise {
                 // 25 décembre Noël
                 LocalDate.of(now.getYear(), 12, 25));
     }
-
     public static boolean bissextile(int y) {
         return (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0);
     }
-
     public static double proportionPondereeDuMois(LocalDate moisDuConge) {
         int mois = moisDuConge.getMonthValue();
         double[] proportions = {0.06666666666666667, 0.23333333333333334, 0.4, 0.4666666666666667, 0.5333333333333333, 0.6, 0.6666666666666666, 0.7333333333333333, 0.8, 0.8666666666666667, 0.9333333333333333, 1.0};
         return proportions[mois - 1];
     }
-
     public static LocalDate getPremierJourAnneeDeConges(LocalDate d) {
         if (d == null) {
             return null;
         }
         return d.getMonthValue() > 5 ? LocalDate.of(d.getYear(), 6, 1) : LocalDate.of(d.getYear() - 1, 6, 1);
     }
-
     public static boolean estJourFerie(LocalDate jour) {
         int monEntier = (int) Entreprise.joursFeries(jour).stream().filter(d -> d.equals(jour)).count();
         int test = bissextile(jour.getYear()) ? 1 : 0;
@@ -85,7 +78,6 @@ public final class Entreprise {
         }
         return monEntier != test;
     }
-
     /**
      * Calcule si une date donnée est dans une plage (intervalle) de date (inclusif)
      *

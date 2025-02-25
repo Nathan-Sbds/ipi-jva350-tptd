@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SalarieAideADomicileRepository extends JpaRepository<SalarieAideADomicile, Long> {
     SalarieAideADomicile findByNom(String nom);
-
     @Query("select sum(congesPayesPrisAnneeNMoins1)/sum(congesPayesAcquisAnneeNMoins1) from SalarieAideADomicile")
     Double partCongesPrisTotauxAnneeNMoins1();
 }

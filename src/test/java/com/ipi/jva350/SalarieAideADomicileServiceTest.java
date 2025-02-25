@@ -15,13 +15,11 @@ import static org.mockito.Mockito.*;
 class SalarieAideADomicileServiceTest {
     private SalarieAideADomicileRepository repository;
     private SalarieAideADomicileService service;
-
     @BeforeEach
     void setUp() {
         repository = mock(SalarieAideADomicileRepository.class);
         service = new SalarieAideADomicileService(repository);
     }
-
     @Test
     void testCreerSalarieAideADomicile() throws SalarieException {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
@@ -30,7 +28,6 @@ class SalarieAideADomicileServiceTest {
         service.creerSalarieAideADomicile(salarie);
         verify(repository).save(salarie);
     }
-
     @Test
     void testCreerSalarieAideADomicileThrowsExceptionIfNameExists() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
@@ -38,7 +35,6 @@ class SalarieAideADomicileServiceTest {
         when(repository.findByNom("John Doe")).thenReturn(salarie);
         assertThrows(SalarieException.class, () -> service.creerSalarieAideADomicile(salarie));
     }
-
     @Test
     void testCreerSalarieAideADomicileThrowsExceptionIfIdProvided() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
@@ -46,7 +42,6 @@ class SalarieAideADomicileServiceTest {
         salarie.setNom("John Doe");
         assertThrows(SalarieException.class, () -> service.creerSalarieAideADomicile(salarie));
     }
-
     @Test
     void testCalculeLimiteEntrepriseCongesPermis() {
         LocalDate moisEnCours = LocalDate.of(2023, 7, 1);
@@ -59,7 +54,6 @@ class SalarieAideADomicileServiceTest {
                 moisDebutContrat, premierJourDeConge, dernierJourDeConge);
         assertEquals(15, limite);
     }
-
     @Test
     void testAjouteConge() {
         SalarieAideADomicile salarie = mock(SalarieAideADomicile.class);
@@ -75,7 +69,6 @@ class SalarieAideADomicileServiceTest {
         assertFalse(salarie.getCongesPayesPris().contains(jourDebut));
         assertFalse(salarie.getCongesPayesPris().contains(jourFin));
     }
-
     @Test
     void testClotureMois() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
@@ -83,7 +76,6 @@ class SalarieAideADomicileServiceTest {
         service.clotureMois(salarie, 20);
         assertEquals(LocalDate.of(2023, 6, 1), salarie.getMoisEnCours());
     }
-
     @Test
     void testClotureAnnee() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
@@ -99,17 +91,13 @@ class SalarieAideADomicileServiceTest {
         assertFalse(salarie.getCongesPayesPris().isEmpty());
         verify(repository).save(salarie);
     }
-
     @Test
     void testGetNbCongesPayesPrisDecomptesAnneeN() throws SalarieException {
         SalarieAideADomicile salarie = mock(SalarieAideADomicile.class);
         LinkedHashSet<LocalDate> congesPayesPrisDecomptesAnneeN = new LinkedHashSet<>(Set.of(LocalDate.of(2023, 7, 1), LocalDate.of(2023, 7, 2)));
         Set<LocalDate> joursDecomptes = new LinkedHashSet<>(Set.of(LocalDate.of(2023, 7, 1), LocalDate.of(2023, 7, 2), LocalDate.of(2023, 7, 3)));
-
         when(salarie.getCongesPayesRestantAnneeNMoins1()).thenReturn(5.0);
-
         int nbCongesPayesPrisDecomptesAnneeN = SalarieAideADomicileService.getNbCongesPayesPrisDecomptesAnneeN(salarie, congesPayesPrisDecomptesAnneeN, joursDecomptes);
-
         assertEquals(2, nbCongesPayesPrisDecomptesAnneeN);
     }
 }

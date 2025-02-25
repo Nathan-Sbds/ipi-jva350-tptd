@@ -11,7 +11,6 @@ public class SalarieAideADomicile {
     private Long id;
     private String nom;
     protected static final List<DayOfWeek> joursHabituellementTravailles = new ArrayList<>();
-
     static {
         joursHabituellementTravailles.add(DayOfWeek.MONDAY);
         joursHabituellementTravailles.add(DayOfWeek.TUESDAY);
@@ -19,7 +18,6 @@ public class SalarieAideADomicile {
         joursHabituellementTravailles.add(DayOfWeek.THURSDAY);
         joursHabituellementTravailles.add(DayOfWeek.FRIDAY);
     }
-
     private LocalDate moisEnCours;
     private LocalDate moisDebutContrat;
     private double joursTravaillesAnneeN = 0;
@@ -33,10 +31,8 @@ public class SalarieAideADomicile {
     private double joursTravaillesAnneeNMoins1 = 0;
     private double congesPayesAcquisAnneeNMoins1 = 0;
     private double congesPayesPrisAnneeNMoins1 = 0;
-
     public SalarieAideADomicile() {
     }
-
     public SalarieAideADomicile(String nom, LocalDate moisDebutContrat, LocalDate moisEnCours, double joursTravaillesAnneeN, double congesPayesAcquisAnneeN, double joursTravaillesAnneeNMoins1, double congesPayesAcquisAnneeNMoins1, double congesPayesPrisAnneeNMoins1) {
         this.nom = nom;
         this.moisDebutContrat = moisDebutContrat;
@@ -47,11 +43,9 @@ public class SalarieAideADomicile {
         this.joursTravaillesAnneeN = joursTravaillesAnneeN;
         this.congesPayesAcquisAnneeN = congesPayesAcquisAnneeN;
     }
-
     public boolean aLegalementDroitADesCongesPayes() {
         return this.getJoursTravaillesAnneeNMoins1() > 10;
     }
-
     /**
      * @param dateDebut
      * @param dateFin
@@ -75,30 +69,24 @@ public class SalarieAideADomicile {
         }
         return joursDeCongeDecomptes;
     }
-
     public static boolean estJourOuvrable(LocalDate jour) {
         return jour.getDayOfWeek().getValue() != DayOfWeek.SUNDAY.getValue() && !Entreprise.estJourFerie(jour);
     }
-
     public boolean estHabituellementTravaille(LocalDate jour) {
         return joursHabituellementTravailles.contains(jour.getDayOfWeek());
     }
-
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
-
     /**
      * @return the nom
      */
     public String getNom() {
         return nom;
     }
-
     /**
      * @param nom the nom to set
      */
@@ -106,75 +94,57 @@ public class SalarieAideADomicile {
         this.nom = nom;
         return this;
     }
-
     public double getJoursTravaillesAnneeN() {
         return joursTravaillesAnneeN;
     }
-
     public void setJoursTravaillesAnneeN(double joursTravaillesAnneeN) {
         this.joursTravaillesAnneeN = joursTravaillesAnneeN;
     }
-
     public double getCongesPayesAcquisAnneeN() {
         return congesPayesAcquisAnneeN;
     }
-
     public void setCongesPayesAcquisAnneeN(double congesPayesAcquisAnneeN) {
         this.congesPayesAcquisAnneeN = congesPayesAcquisAnneeN;
     }
-
     public Set<LocalDate> getCongesPayesPris() {
         return congesPayesPris;
     }
-
     public void setCongesPayesPris(Set<LocalDate> congesPayesPris) {
         this.congesPayesPris = (LinkedHashSet<LocalDate>) congesPayesPris;
     }
-
     public double getJoursTravaillesAnneeNMoins1() {
         return joursTravaillesAnneeNMoins1;
     }
-
     public void setJoursTravaillesAnneeNMoins1(double joursTravaillesAnneeNMoins1) {
         this.joursTravaillesAnneeNMoins1 = joursTravaillesAnneeNMoins1;
     }
-
     public double getCongesPayesRestantAnneeNMoins1() {
         return this.congesPayesAcquisAnneeNMoins1 - this.getCongesPayesPrisAnneeNMoins1();
     }
-
     public double getCongesPayesAcquisAnneeNMoins1() {
         return congesPayesAcquisAnneeNMoins1;
     }
-
     public void setCongesPayesAcquisAnneeNMoins1(double congesPayesAcquisAnneeNMoins1) {
         this.congesPayesAcquisAnneeNMoins1 = congesPayesAcquisAnneeNMoins1;
     }
-
     public double getCongesPayesPrisAnneeNMoins1() {
         return congesPayesPrisAnneeNMoins1;
     }
-
     public void setCongesPayesPrisAnneeNMoins1(double congesPayesPrisAnneeNMoins1) {
         this.congesPayesPrisAnneeNMoins1 = congesPayesPrisAnneeNMoins1;
     }
-
     public LocalDate getMoisEnCours() {
         return moisEnCours;
     }
-
     public void setMoisEnCours(LocalDate moisEnCours) {
         this.moisEnCours = moisEnCours;
     }
-
     public LocalDate getMoisDebutContrat() {
         return moisDebutContrat;
     }
-
     public void setMoisDebutContrat(LocalDate moisDebutContrat) {
         this.moisDebutContrat = moisDebutContrat;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -182,7 +152,6 @@ public class SalarieAideADomicile {
         SalarieAideADomicile s = (SalarieAideADomicile) o;
         return Objects.equals(id, s.id) && Objects.equals(nom, s.nom);
     }
-
     @Override
     public int hashCode() {
         return Objects.hash(id, nom);

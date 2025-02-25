@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 class LinkedHashSetStringConverterTest {
     private final LinkedHashSetStringConverter converter = new LinkedHashSetStringConverter();
-
     @Test
     void testConvertToDatabaseColumn() {
         LinkedHashSet<LocalDate> dates = new LinkedHashSet<>();
@@ -19,12 +18,10 @@ class LinkedHashSetStringConverterTest {
         String result = converter.convertToDatabaseColumn(dates);
         assertEquals(expected, result);
     }
-
     @Test
     void testConvertToDatabaseColumn_Null() {
         assertNull(converter.convertToDatabaseColumn(null));
     }
-
     @Test
     void testConvertToEntityAttribute() {
         String datesString = "2023-01-01;2023-01-02";
@@ -34,12 +31,10 @@ class LinkedHashSetStringConverterTest {
         LinkedHashSet<LocalDate> result = converter.convertToEntityAttribute(datesString);
         assertEquals(expected, result);
     }
-
     @Test
     void testConvertToEntityAttribute_Null() {
         assertNull(converter.convertToEntityAttribute(null));
     }
-
     @Test
     void testConvertToEntityAttribute_EmptyString() {
         LinkedHashSet<LocalDate> result = converter.convertToEntityAttribute("");

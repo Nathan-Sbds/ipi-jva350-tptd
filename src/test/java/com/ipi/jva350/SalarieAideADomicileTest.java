@@ -47,7 +47,6 @@ class SalarieAideADomicileTest {
         assertEquals(15, salarie.getCongesPayesAcquisAnneeNMoins1());
         assertEquals(10, salarie.getCongesPayesPrisAnneeNMoins1());
     }
-
     @Test
     void testALegalementDroitADesCongesPayes() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
@@ -56,7 +55,6 @@ class SalarieAideADomicileTest {
         salarie.setJoursTravaillesAnneeNMoins1(5);
         assertFalse(salarie.aLegalementDroitADesCongesPayes());
     }
-
     @Test
     void testCalculeJoursDeCongeDecomptesPourPlage() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
@@ -65,7 +63,6 @@ class SalarieAideADomicileTest {
         Set<LocalDate> joursDecomptes = salarie.calculeJoursDeCongeDecomptesPourPlage(dateDebut, dateFin);
         assertEquals(7, joursDecomptes.size());
     }
-
     @Test
     void testEstJourOuvrable() {
         LocalDate jour = LocalDate.of(2023, 7, 1);

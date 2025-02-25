@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class SalarieAideADomicileRepositoryTest {
     @Autowired
     private SalarieAideADomicileRepository repository;
-
     @Test
     void testFindByNom() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
@@ -20,7 +19,6 @@ class SalarieAideADomicileRepositoryTest {
         assertNotNull(found);
         assertEquals("John Doe", found.getNom());
     }
-
     @Test
     void testPartCongesPrisTotauxAnneeNMoins1() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();

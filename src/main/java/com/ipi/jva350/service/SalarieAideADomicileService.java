@@ -17,9 +17,7 @@ public class SalarieAideADomicileService {
     public SalarieAideADomicileService(SalarieAideADomicileRepository salarieAideADomicileRepository) {
         this.salarieAideADomicileRepository = salarieAideADomicileRepository;
     }
-
     private final SalarieAideADomicileRepository salarieAideADomicileRepository;
-
     /**
      * Créée un nouveau salarié en base de données.
      *
@@ -36,7 +34,6 @@ public class SalarieAideADomicileService {
         }
         salarieAideADomicileRepository.save(salarieAideADomicile);
     }
-
     /**
      * Calcule la limite maximale de congés prenable autorisée selon les règles de l'entreprise, à savoir :
      * - de base, les congés acquis en année N-1 dans la proportion selon l'avancement dans l'année
@@ -79,7 +76,6 @@ public class SalarieAideADomicileService {
         limiteCongesBd = limiteCongesBd.setScale(3, RoundingMode.HALF_UP);
         return Math.round(limiteCongesBd.doubleValue());
     }
-
     /**
      * Calcule les jours de congés à décompter, et si valide (voir plus bas) les décompte au salarié
      * et le sauve en base de données
@@ -113,7 +109,6 @@ public class SalarieAideADomicileService {
         salarieAideADomicile.setCongesPayesPrisAnneeNMoins1(nbCongesPayesPrisDecomptesAnneeN);
         salarieAideADomicileRepository.save(salarieAideADomicile);
     }
-
     public static int getNbCongesPayesPrisDecomptesAnneeN(SalarieAideADomicile salarieAideADomicile, Set<LocalDate> congesPayesPrisDecomptesAnneeN, Set<LocalDate> joursDecomptes) throws SalarieException {
         int nbCongesPayesPrisDecomptesAnneeN = congesPayesPrisDecomptesAnneeN.size();
         if (joursDecomptes.size() > nbCongesPayesPrisDecomptesAnneeN + 1) {
@@ -126,7 +121,6 @@ public class SalarieAideADomicileService {
         }
         return nbCongesPayesPrisDecomptesAnneeN;
     }
-
     /**
      * Clôture le mois en cours du salarie donné (et fait les calculs requis pour sa feuille de paie de ce mois) :
      * (pas forcément en cours, par exemple en cas de retard, vacances de l'entreprise)
@@ -148,7 +142,6 @@ public class SalarieAideADomicileService {
         }
         salarieAideADomicileRepository.save(salarieAideADomicile);
     }
-
     /**
      * Clôture l'année donnée. Il s'agit d'une année DE CONGES donc du 1er juin au 31 mai.
      * Passe les variables N à N-1
