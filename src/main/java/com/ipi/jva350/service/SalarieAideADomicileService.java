@@ -94,7 +94,7 @@ public class SalarieAideADomicileService {
     /**
      * Calcule les jours de congés à décompter, et si valide (voir plus bas) les décompte au salarié
      * et le sauve en base de données
-     * @param salarieAideADomicile TODO nom ?
+     * @param salarieAideADomicile TO DO nom ?
      * @param jourDebut
      * @param jourFin peut être dans l'année suivante mais uniquement son premier jour
      * @throws SalarieException si pas de jour décompté, ou avant le mois en cours, ou dans l'année suivante
@@ -115,8 +115,7 @@ public class SalarieAideADomicileService {
         }
 
         // on vérifie que le congé demandé est dans les mois restants de l'année de congés en cours du salarié :
-        if (joursDecomptes.stream().findFirst().get()
-                .isBefore(salarieAideADomicile.getMoisEnCours())) {
+        if (joursDecomptes.stream().findFirst().get().isBefore(salarieAideADomicile.getMoisEnCours())) {
             throw new SalarieException("Pas possible de prendre de congé avant le mois en cours !");
         }
         LinkedHashSet<LocalDate> congesPayesPrisDecomptesAnneeN = new LinkedHashSet<>(joursDecomptes.stream()
@@ -172,7 +171,7 @@ public class SalarieAideADomicileService {
         salarieAideADomicile.setJoursTravaillesAnneeN(salarieAideADomicile.getJoursTravaillesAnneeN() + joursTravailles);
 
         salarieAideADomicile.setCongesPayesAcquisAnneeN(salarieAideADomicile.getCongesPayesAcquisAnneeN()
-                + SalarieAideADomicile.congesPayesAcquisParMois);
+                + SalarieAideADomicile.CONGES_PAYES_ACQUIS_PAR_MOIS);
 
         salarieAideADomicile.setMoisEnCours(salarieAideADomicile.getMoisEnCours().plusMonths(1));
 

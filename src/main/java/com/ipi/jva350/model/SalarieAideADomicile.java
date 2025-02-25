@@ -8,7 +8,7 @@ import java.util.*;
 @Entity
 public class SalarieAideADomicile {
 
-    public static final float congesPayesAcquisParMois = 2.5f;
+    public static final float CONGES_PAYES_ACQUIS_PAR_MOIS = 2.5f;
 
 
     @Id
@@ -45,7 +45,6 @@ public class SalarieAideADomicile {
     }
 
     public SalarieAideADomicile(String nom, LocalDate moisDebutContrat, LocalDate moisEnCours,
-                                //LinkedHashSet<LocalDate> congesPayesPris,
                                 double joursTravaillesAnneeN, double congesPayesAcquisAnneeN,
                                 double joursTravaillesAnneeNMoins1, double congesPayesAcquisAnneeNMoins1, double congesPayesPrisAnneeNMoins1
                                  ) {
@@ -57,7 +56,6 @@ public class SalarieAideADomicile {
         this.congesPayesPrisAnneeNMoins1 = congesPayesPrisAnneeNMoins1;
         this.joursTravaillesAnneeN = joursTravaillesAnneeN;
         this.congesPayesAcquisAnneeN = congesPayesAcquisAnneeN;
-        //this.congesPayesPris = congesPayesPris;
     }
 
     /**
@@ -174,15 +172,6 @@ public class SalarieAideADomicile {
     public double getCongesPayesRestantAnneeNMoins1() {
         return this.congesPayesAcquisAnneeNMoins1 - this.getCongesPayesPrisAnneeNMoins1();
     }
-    /*
-    public double getCongesPayesRestantAnneeNMoins1() {
-        return congesPayesRestantAnneeNMoins1;
-    }
-
-    public void setCongesPayesRestantAnneeNMoins1(double congesPayesRestantAnneeNMoins1) {
-        this.congesPayesRestantAnneeNMoins1 = congesPayesRestantAnneeNMoins1;
-    }
-    */
 
     public double getCongesPayesAcquisAnneeNMoins1() {
         return congesPayesAcquisAnneeNMoins1;
