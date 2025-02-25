@@ -86,8 +86,8 @@ class SalarieAideADomicileServiceTest {
         when(salarie.getMoisDebutContrat()).thenReturn(LocalDate.of(2020, 1, 1));
         when(salarie.getCongesPayesRestantAnneeNMoins1()).thenReturn(20.0);
 
-        verify(salarie).setCongesPayesPrisAnneeNMoins1(50);
-        verify(repository).save(salarie);
+        assertFalse(salarie.getCongesPayesPris().contains(jourDebut));
+        assertFalse(salarie.getCongesPayesPris().contains(jourFin));
     }
 
     @Test
