@@ -114,7 +114,7 @@ public class SalarieAideADomicileService {
         salarieAideADomicileRepository.save(salarieAideADomicile);
     }
 
-    private static int getNbCongesPayesPrisDecomptesAnneeN(SalarieAideADomicile salarieAideADomicile, LinkedHashSet<LocalDate> congesPayesPrisDecomptesAnneeN, Set<LocalDate> joursDecomptes) throws SalarieException {
+    public static int getNbCongesPayesPrisDecomptesAnneeN(SalarieAideADomicile salarieAideADomicile, Set<LocalDate> congesPayesPrisDecomptesAnneeN, Set<LocalDate> joursDecomptes) throws SalarieException {
         int nbCongesPayesPrisDecomptesAnneeN = congesPayesPrisDecomptesAnneeN.size();
         if (joursDecomptes.size() > nbCongesPayesPrisDecomptesAnneeN + 1) {
             // NB. 1 jour dans la nouvelle année est toujours toléré, pour résoudre le cas d'un congé devant se finir un

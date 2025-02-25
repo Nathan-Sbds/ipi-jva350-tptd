@@ -99,4 +99,17 @@ class SalarieAideADomicileServiceTest {
         assertFalse(salarie.getCongesPayesPris().isEmpty());
         verify(repository).save(salarie);
     }
+
+    @Test
+    void testGetNbCongesPayesPrisDecomptesAnneeN() throws SalarieException {
+        SalarieAideADomicile salarie = mock(SalarieAideADomicile.class);
+        LinkedHashSet<LocalDate> congesPayesPrisDecomptesAnneeN = new LinkedHashSet<>(Set.of(LocalDate.of(2023, 7, 1), LocalDate.of(2023, 7, 2)));
+        Set<LocalDate> joursDecomptes = new LinkedHashSet<>(Set.of(LocalDate.of(2023, 7, 1), LocalDate.of(2023, 7, 2), LocalDate.of(2023, 7, 3)));
+
+        when(salarie.getCongesPayesRestantAnneeNMoins1()).thenReturn(5.0);
+
+        int nbCongesPayesPrisDecomptesAnneeN = SalarieAideADomicileService.getNbCongesPayesPrisDecomptesAnneeN(salarie, congesPayesPrisDecomptesAnneeN, joursDecomptes);
+
+        assertEquals(2, nbCongesPayesPrisDecomptesAnneeN);
+    }
 }
