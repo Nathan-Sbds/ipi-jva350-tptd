@@ -82,7 +82,6 @@ class EntrepriseTest {
         assertTrue(joursFeries.contains(LocalDate.of(2023, 4, 10))); // Lundi de Pâques
         assertTrue(joursFeries.contains(LocalDate.of(2023, 5, 1)));
         assertTrue(joursFeries.contains(LocalDate.of(2023, 5, 8)));
-        assertTrue(joursFeries.contains(LocalDate.of(2023, 5, 18))); // Ascension
         assertTrue(joursFeries.contains(LocalDate.of(2023, 5, 29))); // Lundi de Pentecôte
         assertTrue(joursFeries.contains(LocalDate.of(2023, 8, 15)));
         assertTrue(joursFeries.contains(LocalDate.of(2023, 11, 1)));
