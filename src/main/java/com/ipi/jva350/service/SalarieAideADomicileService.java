@@ -187,7 +187,7 @@ public class SalarieAideADomicileService {
      * Passe les variables N à N-1
      * @param salarieAideADomicile
      */
-    void clotureAnnee(SalarieAideADomicile salarieAideADomicile) {
+    public void clotureAnnee(SalarieAideADomicile salarieAideADomicile) {
         salarieAideADomicile.setJoursTravaillesAnneeNMoins1(salarieAideADomicile.getJoursTravaillesAnneeN());
         salarieAideADomicile.setCongesPayesAcquisAnneeNMoins1(salarieAideADomicile.getCongesPayesAcquisAnneeN());
         salarieAideADomicile.setCongesPayesPrisAnneeNMoins1(0);

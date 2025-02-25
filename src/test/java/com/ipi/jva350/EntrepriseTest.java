@@ -6,6 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.time.LocalDate;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EntrepriseTest {
@@ -20,12 +22,12 @@ class EntrepriseTest {
         date = LocalDate.of(2023, 8, 1);
         assertFalse(Entreprise.estDansPlage(date, debut, fin));
     }
+
     @Test
     void testEstJourFerie() {
         LocalDate jour = LocalDate.of(2023, 1, 1);
         assertTrue(Entreprise.estJourFerie(jour));
 
-        jour = LocalDate.of(2023, 1, 2);
         assertFalse(Entreprise.estJourFerie(jour));
     }
 
@@ -62,4 +64,32 @@ class EntrepriseTest {
         assertEquals(expected, Entreprise.proportionPondereeDuMois(LocalDate.parse(date)));
     }
 
+    @Test
+    void testGetPremierJourAnneeDeConges() {
+        LocalDate date = LocalDate.of(2023, 7, 1);
+        assertEquals(LocalDate.of(2023, 6, 1), Entreprise.getPremierJourAnneeDeConges(date));
+
+        date = LocalDate.of(2023, 5, 1);
+        assertEquals(LocalDate.of(2022, 6, 1), Entreprise.getPremierJourAnneeDeConges(date));
+
+        assertNull(Entreprise.getPremierJourAnneeDeConges(null));
+    }
+
+    @Test
+    void testJoursFeries() {
+        LocalDate now = LocalDate.of(2023, 1, 1);
+        List<LocalDate> joursFeries = Entreprise.joursFeries(now);
+        assertEquals(11, joursFeries.size());
+        assertTrue(joursFeries.contains(LocalDate.of(2023, 1, 1)));
+        assertTrue(joursFeries.contains(LocalDate.of(2023, 4, 10))); // Lundi de Pâques
+        assertTrue(joursFeries.contains(LocalDate.of(2023, 5, 1)));
+        assertTrue(joursFeries.contains(LocalDate.of(2023, 5, 8)));
+        assertTrue(joursFeries.contains(LocalDate.of(2023, 5, 18))); // Ascension
+        assertTrue(joursFeries.contains(LocalDate.of(2023, 5, 29))); // Lundi de Pentecôte
+        assertTrue(joursFeries.contains(LocalDate.of(2023, 7, 14)));
+        assertTrue(joursFeries.contains(LocalDate.of(2023, 8, 15)));
+        assertTrue(joursFeries.contains(LocalDate.of(2023, 11, 1)));
+        assertTrue(joursFeries.contains(LocalDate.of(2023, 11, 11)));
+        assertTrue(joursFeries.contains(LocalDate.of(2023, 12, 25)));
+    }
 }

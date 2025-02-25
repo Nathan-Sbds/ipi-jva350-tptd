@@ -104,7 +104,7 @@ public class SalarieAideADomicile {
         }
         return joursDeCongeDecomptes;
     }
-    public boolean estJourOuvrable(LocalDate jour) {
+    public static boolean estJourOuvrable(LocalDate jour) {
         return jour.getDayOfWeek().getValue() != DayOfWeek.SUNDAY.getValue()
                 && !Entreprise.estJourFerie(jour);
     }
