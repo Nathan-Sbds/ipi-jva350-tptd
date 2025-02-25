@@ -69,57 +69,13 @@ public final class Entreprise {
     }
 
     public static boolean bissextile(int y) {
-        String tmp = String.valueOf(y);
-        if (tmp.charAt(2) == '1' || tmp.charAt(2) == '3' || tmp.charAt(2) == 5 || tmp.charAt(2) == '7' || tmp.charAt(2) == '9') {
-            if (tmp.charAt(3)=='2'||tmp.charAt(3)=='6') return true;
-            else
-                return false;
-        }else{
-            if (tmp.charAt(2) == '0' && tmp.charAt(3) == '0') {
-                return false;
-            }
-            if (tmp.charAt(3)=='0'||tmp.charAt(3)=='4'||tmp.charAt(3)=='8')return true;
-        }
-        return false;
+        return (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0);
     }
 
     public static double proportionPondereeDuMois(LocalDate moisDuConge) {
-        int proportionPonderee = 8;
-        int mois = 1 + (moisDuConge.getMonthValue() + 6) % 12;
-        if (mois >= 2) {
-            proportionPonderee += 20;
-        }
-        if (mois >= 3) {
-            proportionPonderee += 20;
-        }
-        if (mois >= 4) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 5) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 6) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 7) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 8) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 9) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 10) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 11) {
-            proportionPonderee += 8;
-        }
-        if (mois >= 12) {
-            proportionPonderee += 8;
-        }
-        return proportionPonderee / 12d / 10d;
+        int mois = moisDuConge.getMonthValue();
+        double[] proportions = {0.06666666666666667, 0.23333333333333334, 0.4, 0.4666666666666667, 0.5333333333333333, 0.6, 0.6666666666666666, 0.7333333333333333, 0.8, 0.8666666666666667, 0.9333333333333333, 1.0};
+        return proportions[mois - 1];
     }
 
 
@@ -141,10 +97,10 @@ public final class Entreprise {
 
     /**
      * Calcule si une date donnée est dans une plage (intervalle) de date (inclusif)
-     * @param d
+     * @param d date à tester
      * @param debut date de début de la plage
      * @param fin date de fin de la plage
-     * @return
+     * @return vrai si la date est dans la plage, faux sinon
      */
     public static boolean estDansPlage(LocalDate d, LocalDate debut, LocalDate fin) {
         if (d == null || debut == null || fin == null) return false;
