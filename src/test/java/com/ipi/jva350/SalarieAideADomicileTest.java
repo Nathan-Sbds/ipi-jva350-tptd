@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +26,7 @@ class SalarieAideADomicileTest {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
         LocalDate dateDebut = LocalDate.of(2023, 7, 1);
         LocalDate dateFin = LocalDate.of(2023, 7, 10);
-        LinkedHashSet<LocalDate> joursDecomptes = salarie.calculeJoursDeCongeDecomptesPourPlage(dateDebut, dateFin);
+        Set<LocalDate> joursDecomptes = salarie.calculeJoursDeCongeDecomptesPourPlage(dateDebut, dateFin);
         assertEquals(7, joursDecomptes.size());
     }
 }
