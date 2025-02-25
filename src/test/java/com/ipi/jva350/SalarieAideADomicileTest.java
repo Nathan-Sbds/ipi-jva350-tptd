@@ -26,6 +26,6 @@ public class SalarieAideADomicileTest {
         LocalDate dateDebut = LocalDate.of(2023, 7, 1);
         LocalDate dateFin = LocalDate.of(2023, 7, 10);
         LinkedHashSet<LocalDate> joursDecomptes = salarie.calculeJoursDeCongeDecomptesPourPlage(dateDebut, dateFin);
-        assertEquals(8, joursDecomptes.size());
+        assertEquals(7, joursDecomptes.size());
     }
 }

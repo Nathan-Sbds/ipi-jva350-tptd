@@ -17,6 +17,7 @@ public class SalarieAideADomicileRepositoryTest {
     public void testFindByNom() {
         SalarieAideADomicile salarie = new SalarieAideADomicile();
         salarie.setNom("John Doe");
+        repository.save(salarie);
         SalarieAideADomicile found = repository.findByNom("John Doe");
         assertNotNull(found);
         assertEquals("John Doe", found.getNom());
