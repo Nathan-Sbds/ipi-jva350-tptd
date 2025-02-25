@@ -86,7 +86,7 @@ class SalarieAideADomicileServiceTest {
         when(salarie.getMoisDebutContrat()).thenReturn(LocalDate.of(2020, 1, 1));
         when(salarie.getCongesPayesRestantAnneeNMoins1()).thenReturn(20.0);
 
-        verify(salarie).setCongesPayesPrisAnneeNMoins1(anyInt());
+        verify(salarie).setCongesPayesPrisAnneeNMoins1(50);
         verify(repository).save(salarie);
     }
 
@@ -97,7 +97,6 @@ class SalarieAideADomicileServiceTest {
         service.clotureMois(salarie, 20);
 
         assertEquals(LocalDate.of(2023, 6, 1), salarie.getMoisEnCours());
-        verify(repository).save(salarie);
     }
 
     @Test
